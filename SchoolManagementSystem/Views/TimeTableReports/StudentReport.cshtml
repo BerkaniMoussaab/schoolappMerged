@@ -1,0 +1,79 @@
+﻿@model IEnumerable<SchoolManagementSystem.TimeTblTable>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Time Table</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+        <h3>Teacher Time Table</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    Teacher
+                </th>
+                <th>
+                    Subject
+                </th>
+                <th>
+                    Day
+                </th>
+                <th>
+                    Start Time
+                </th>
+                <th>
+                    End Time
+                </th>
+
+                <th>
+                    Status
+                </th>
+                <th>
+                    User
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        Mr/Miss: @Html.DisplayFor(modelItem => item.StaffTable.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassSubjectTable.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Day)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserTable.UserName)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿@model SchoolManagementSystem.AnnualTable
+
+@{
+    ViewBag.Title = "Promote Fee";
+
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Annual/Promote Fee Detail</h6>
+        </div>
+        <div class="card-body">
+            <hr />
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dt>
+                            Annual/Promote Fee Title
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Title)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            Details
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Description)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            Fees
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Fees)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            Status
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.IsActive)
+                        </dd>
+                        </div>
+                       <div class="col-md-6">
+                        <dt>
+                            Programe
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ProgrameTable.Name)
+                        </dd>
+                           </div>
+                           <div class="col-md-6">
+                               <dt>
+                                   Created by
+                               </dt>
+
+                               <dd>
+                                   @Html.DisplayFor(model => model.UserTable.FullName)
+                               </dd>
+                               </div>
+                           </div>
+            </dl>
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.AnnualID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </p>
+        </div>
+    </div>
+}

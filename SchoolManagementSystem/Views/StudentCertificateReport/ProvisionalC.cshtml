@@ -1,0 +1,91 @@
+﻿@model SchoolManagementSystem.StudentPromotTable
+@using SchoolManagementSystem.Models;
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Character Certificate</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div>
+
+        <div class="container">
+
+            @using (Html.BeginForm())
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="hidden-print">
+                                <a href="javascript:window.print()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <a href='@Url.Action("SendEmail","#")' class="btn btn-default"><i class="fas fa-envelope-open-text"></i> Email</a>
+                                <input type="submit" value="Submit" class="btn btn-success" />
+                                <h2>@ViewBag.Message</h2>
+                            </div>
+                            <br /><br />
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="text-center"> <h1><b>FINAL YEAR SCHOOL</b></h1></div>
+                                    <div class="text-center"><img src="~/Content/AdminTemplate/img/final_edit-4.png" height="200" width="220" /></div>
+                                    <div class="text-center"> <p>Recognized</p></div>
+                                    <div class="text-center"><p> Afghan colony peshawar</p></div>
+                                    <div class="text-center"><h2><b>PROVISIONAL CERTIFICATE</b></h2></div><br />
+                                    <div class="text-center"><b>Roll No:<input type="text" placeholder="Rollno" />  Enolment No:<input type="text" placeholder="Enter Enolment No" /><br />Session:<input type="text" placeholder="Enter Session" /></b></div>
+
+                                    <br />
+                                    <div class="clearfix"></div>
+                                    <br />
+                                    <div>
+                                        Certificate That
+                                        <span><b>Mr/Miss.</b></span><b>@Model.StudentTable.Name</b>
+                                        <span>son/daughter</span> of <b> Mr. @Model.StudentTable.FatherName</b> has passed the Secondary School Certificate Examination from the board of intermediate and Secondary Education
+                                        Peshawar.
+                                        <br />
+                                        Held in <input type="text" placeholder="Enter Date" />  <input type="text" placeholder="Enter Date" />as a Regulaer Student of this School.
+                                        <br />
+                                        The  Candidate Passed the following Subjects. 1.<input type="text" placeholder="Enter subject" /> 2.<input type="text" placeholder="Enter subject" />
+                                        3.<input type="text" placeholder="Enter subject" /><br />4.<input type="text" placeholder="Enter subject" />
+                                        5.<input type="text" placeholder="Enter subject" />6.<input type="text" placeholder="Enter subject" />
+                                        7.<input type="text" placeholder="Enter subject" /><br />8.<input type="text" placeholder="Enter subject" />.
+
+                                        <span>He/She</span>obtained <input type="text" placeholder="Obtain marks" /> out of <input type="text" placeholder="Total marks" /> and has been placed in grade <input type="text" placeholder="Grade" />.<br />
+                                        <b>Date of birth</b> (in words): <b>@WrittenNumerics.DateToWritten(Model.StudentTable.DateofBirth)</b>
+                                        <br /><b>Date of birth</b> (in figure): <b>@Model.StudentTable.DateofBirth</b><br />
+                                        <br /><br />
+                                        <div><spin class="pull-left">______________________</spin> <spin class="pull-right">______________________</spin></div>
+                                        <br />
+                                        <div>
+                                            <spin class="pull-left">Prepared by</spin><spin class="pull-right">Principal</spin>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script src="~/Scripts/moment.js"></script>
+        <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+
+    </div>
+</body>
+</html>

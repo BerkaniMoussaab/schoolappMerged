@@ -1,0 +1,75 @@
+﻿@model SchoolManagementSystem.HomeWorkTable
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HomeWorkTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassTable.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkTypeTable.HomeWorkTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkTypeTable.HomeWorkTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentTable.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HomeWorkID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,66 @@
+﻿@model SchoolManagementSystem.AbsenceTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Student Attedance Detail</h6>
+    </div>
+    <div class="card-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-12">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SessionID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SessionID)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StudentTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StudentTable.Name)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClassTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClassTable.Name)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AttendDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AttendDate)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AttendTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AttendTime)
+                    </dd>
+                </div>
+            </div>
+        </dl>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.AttendanceID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

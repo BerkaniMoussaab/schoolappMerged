@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View</h2>
+
+<div class="col-md-4">
+    <div class="form-group">
+        
+        @Html.DropDownList("Classes", (IEnumerable
+        <SelectListItem>)ViewBag.MySkills)
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.GroupeId, "Select Current Groupe", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.GroupeId, new SelectList(" "), "--Select Groupe--", new { @class = "form-control" })
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="form-group">
+
+        @Html.LabelFor(model => model.StudentID, "Select Current Student", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(model => model.StudentID, new SelectList(" "), "--Select Student--", new { @class = "form-control" })
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+    $(function () {
+        $("#Status").click(function () {
+            if ($(this).is(':checked')) {
+                $("#justificationChoices").show();
+            }
+            else {
+                $("#justificationChoices").hide();
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var inputValue = $(this).attr("value");
+            var targetBox = $("." + inputValue);
+            $(".box").not(targetBox).hide();
+            $(targetBox).show();
+        });
+    });
+</script>
+<script src="~/Content/AdminTemplate/js/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ClassID").change(function () {
+            $("#GroupeId").empty();
+            $.get("/AbsenceTables/GetGroupeList", { ClassID: $("#ClassID").val() }, function (data) {
+                $("#GroupeId").empty();
+                let newOption = new Option('Select groupe ', ' ');
+                $("#GroupeId").append(newOption);
+                $.each(data, function (index, row) {
+
+                    $("#GroupeId").append("<option value='" + row.GroupeId + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#GroupeId").change(function () {
+            $("#StudentID").empty();
+            document.getElementById('StudentID').selectedIndex = -1;
+            $.get("/AbsenceTables/GetStudentList", { Groupe: $("#GroupeId").val() }, function (data) {
+                $("#StudentID").empty();
+
+                $.each(data, function (index, row) {
+
+                    $("#StudentID").append("<option value='" + row.StudentID + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+    function show1() {
+        document.getElementById('justificationText').style.display = 'none';
+    }
+    function show2() {
+        document.getElementById('justificationText').style.display = 'block';
+    }
+</script>

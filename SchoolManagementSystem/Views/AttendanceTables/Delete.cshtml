@@ -1,0 +1,64 @@
+﻿@model SchoolManagementSystem.AbsenceTable
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AttendanceTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SessionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SessionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbsenceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbsenceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AttendTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AttendTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentTable.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassTable.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

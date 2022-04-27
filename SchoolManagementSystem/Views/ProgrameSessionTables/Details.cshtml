@@ -1,0 +1,77 @@
+﻿@model SchoolManagementSystem.ProgrameSessionTable
+
+@{
+    ViewBag.Title = "Programe Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Programe Session</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dt>
+                    Session
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.SessionTable.Name)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    Progarme
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ProgrameTable.Name)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    Details
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Details)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    Reg Date
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.RegDate)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    Description
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+            </div>
+            <div class="col-md-6">
+
+
+
+                <dt>
+                    User
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserTable.FullName)
+                </dd>
+                </div>
+            </div>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProgrameSessionID }, new { @class="btn btn-primary"}) 
+    @Html.ActionLink("Back to List", "Index", null, new { @class="btn btn-default"})
+</p>

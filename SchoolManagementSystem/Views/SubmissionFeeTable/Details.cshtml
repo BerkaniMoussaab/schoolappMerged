@@ -1,0 +1,99 @@
+﻿@model SchoolManagementSystem.SubmissionFeeTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Submission Fee Detail</h6>
+    </div>
+    <div class="card-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Amount)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SubmissionDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SubmissionDate)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FeesMonth)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FeesMonth)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Description)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProgrameTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ProgrameTable.Name)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StudentTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StudentTable.Name)
+                    </dd>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UserTable.FullName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UserTable.FullName)
+                    </dd>
+                    </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClassTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClassTable.Name)
+                    </dd>
+                    </div>
+                </div>
+</dl>
+        @Html.ActionLink("Edit", "Save Record", new { id = Model.SubmissionFeeID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</div>

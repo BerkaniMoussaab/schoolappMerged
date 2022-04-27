@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "Teachers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model IEnumerable<SchoolManagementSystem.StaffTable>
+
+
+
+
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">المعلمون</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-condensed table-hover" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            رقم المعلم
+                        </th>
+                        <th>
+                            الاسم
+                        </th>
+                        <th>
+                            الهاتف
+                        </th>
+                       
+                        <th>
+                            ايمايل
+                        </th>
+
+                       
+                        <th>
+                            الصورة
+                        </th>
+                       
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+
+
+                    @foreach (var item in Model)
+                    {
+                        if(item.DesignationID==4)
+                        { 
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StaffID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactNo)
+                            </td>
+
+
+                            <td>
+                                <a href="mailto: @Html.DisplayFor(modelItem => item.EmailAddress)">@Html.DisplayFor(modelItem => item.EmailAddress)</a>
+
+</td>
+
+
+
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Photo))
+                                {
+                                    <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                                }
+                            </td>
+
+
+
+                        </tr>}
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

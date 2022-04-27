@@ -1,0 +1,78 @@
+﻿@model SchoolManagementSystem.ExamMarksTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Exam Marks Sheets</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentTable.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StudentTable.Name)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    Subject
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ClassSubjectTable.Name)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.TotalMarks)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TotalMarks)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ObtainMarks)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ObtainMarks)
+                </dd>
+            </div>
+            <div class="col-md-6">
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ExamTable.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ExamTable.Title)
+                </dd>
+
+
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserTable.FullName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserTable.FullName)
+                </dd>
+            </div>
+        </div>
+                
+           
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MarksID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index")
+    </p>

@@ -1,0 +1,122 @@
+﻿@model IEnumerable<SchoolManagementSystem.StaffTable>
+
+@{
+    ViewBag.Title = "Employees";
+}
+
+
+
+<p>
+    @Html.ActionLink("اضافة عامل", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">liste des employées</h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>
+                        Id Employée
+                    </th>
+                    <th>
+                        Nom Complet
+                    </th>
+                    <th>
+                        Téléphone
+                    </th>
+                    <th>
+                       Salaire
+                    </th>
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Adresse
+                    </th>
+                    <th>
+                       Photo
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StaffID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BasicSalary)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmailAddress)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Photo))
+                            {
+                                <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                            }
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+                        <td>
+                            @Html.ActionLink("تعديل", "Edit", new { id = item.StaffID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("تفاصيل", "Details", new { id = item.StaffID }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("اضافة CV", "CheckCV", "Resume", new { id = item.StaffID }, new { @class = "btn btn-success" })
+                        </td>
+                    </tr>
+
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+<script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+<script>
+            jQuery('#table_format').ddTableFilter();
+</script>
+<script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36251023-1']);
+            _gaq.push(['_setDomainName', 'jqueryscript.net']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+</script>

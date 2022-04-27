@@ -1,0 +1,189 @@
+﻿@model SchoolManagementSystem.AbsenceTable
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>AbsenceTable</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.AbsenceDate, "Absence Date", htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.AbsenceDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AbsenceDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.AbsenceHour, "Absence Date", htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.AbsenceHour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AbsenceHour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ClassID, "Select Current Class", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.ClassID, ViewBag.Classes as SelectList, "--Select Class--", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.GroupeId, "Select Current Groupe", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.GroupeId, new SelectList(" "), "--Select Groupe--", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+
+                @Html.LabelFor(model => model.StudentID, "Select Current Student", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.StudentID, new SelectList(" "), "--Select Student--", new { @class = "form-control" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Status, "وضعية التبرير", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Status)
+                    @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div id="justificationChoices" style="display:none">
+            <table class="table table-striped table-condensed table-hover" style="text-align:center">
+                <tr>
+                    <td>حضور الولي</td>
+                    <td>شهادة طبية</td>
+                    <td>شهادة وفاة</td>
+                    <td>أسباب أخرى</td>
+                </tr>
+                <tr>
+                    <td>
+
+                        @Html.RadioButtonFor(model => model.Justifcation, "حضور الولي", new { onclick = "show1()" })
+
+                    </td>
+
+                    <td>
+
+                        @Html.RadioButtonFor(model => model.Justifcation, "شهادة طبية", new { onclick = "show1()" })
+
+                    </td>
+
+                    <td>
+
+                        @Html.RadioButtonFor(model => model.Justifcation, "شهادة وفاة" , new { onclick = "show1()" })
+
+                    </td>
+
+                    <td>
+
+                        @Html.RadioButtonFor(model => model.Justifcation, "أسباب أخرى", new { onclick = "show2()" })
+                    </td>
+                </tr>
+
+
+                @*<tr> <label><input type="radio" name="colorRadio" value="blue"> أسباب أخري</label></tr>*@
+
+
+
+
+
+
+            </table>
+
+        </div>
+        <div id="justificationText" style="display:none">
+            @Html.LabelFor(model => model.Justifcation, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Justifcation, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Justifcation, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="~/Content/AdminTemplate/js/jquery-1.11.0.min.js"></script>
+<script>
+    $(function () {
+        $("#Status").click(function () {
+            if ($(this).is(':checked')) {
+                $("#justificationChoices").show();
+            }
+            else {
+                $("#justificationChoices").hide();
+            }
+        });
+
+    });
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var inputValue = $(this).attr("value");
+            var targetBox = $("." + inputValue);
+            $(".box").not(targetBox).hide();
+            $(targetBox).show();
+        });
+    });
+</script>
+<script src="~/Content/AdminTemplate/js/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ClassID").change(function () {
+            $("#GroupeId").empty();
+            $.get("/AbsenceTables/GetGroupeList", { ClassID: $("#ClassID").val() }, function (data) {
+                $("#GroupeId").empty();
+                let newOption = new Option('Select groupe ', ' ');
+                $("#GroupeId").append(newOption);
+                $.each(data, function (index, row) {
+
+                    $("#GroupeId").append("<option value='" + row.GroupeId + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#GroupeId").change(function () {
+            $("#StudentID").empty();
+            document.getElementById('StudentID').selectedIndex = -1;
+            $.get("/AbsenceTables/GetStudentList", { Groupe: $("#GroupeId").val() }, function (data) {
+                $("#StudentID").empty();
+
+                $.each(data, function (index, row) {
+
+                    $("#StudentID").append("<option value='" + row.StudentID + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+    function show1() {
+        document.getElementById('justificationText').style.display = 'none';
+    }
+    function show2() {
+        document.getElementById('justificationText').style.display = 'block';
+    }
+</script>

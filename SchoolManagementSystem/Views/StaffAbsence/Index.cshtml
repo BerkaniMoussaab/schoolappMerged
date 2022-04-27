@@ -1,0 +1,58 @@
+﻿@model IEnumerable<SchoolManagementSystem.StaffAbsence>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AbsenceStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AbsenceEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Justification)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffTable.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AbsenceStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AbsenceEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Justification)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffTable.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StaffAbsenceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StaffAbsenceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StaffAbsenceID })
+        </td>
+    </tr>
+}
+
+</table>

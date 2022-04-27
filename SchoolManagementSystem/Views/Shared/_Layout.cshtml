@@ -1,0 +1,662 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/AdminTemplate/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
+    @*<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">*@
+    <!-- Custom styles for this template-->
+    <link href="~/Content/AdminTemplate/css/sb-admin-2.css" rel="stylesheet">
+    <link href="~/Content/AdminTemplate/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion " style="
+        font-size:large;
+        align-content:center ;min-width:15%; " id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <!-- Divider -->
+
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                @{
+
+                    int usertypeid = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));}
+
+
+            </li>
+            @{
+                if (usertypeid == 1 || usertypeid == 2 || usertypeid == 5 || usertypeid == 4)  // Admin or acountant or operator
+                {
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        info élève
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseStudent" aria-expanded="true" aria-controls="collapseStudent">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Elève</span>
+                        </a>
+                        <div id="collapseStudent" class="collapse" aria-labelledby="headingStudent" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+
+
+
+                                <h6 class="collapse-header">Registration:</h6>
+                                @{
+                                    if (usertypeid == 1)  // Admin
+                                    {
+                                        @Html.ActionLink("Nouvelle inscription", "Create", "StudentTable", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Liste des elèves", "Index", "StudentTable", null, new { @class = "collapse-item" })
+
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Affiliations:</h6>
+                                        @Html.ActionLink("Affecter une Affiliation", "Create", "StudentPromotTables", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Liste des affiliations", "Index", "StudentPromotTables", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Frais annuelle", "Index", "AnnualTables", null, new { @class = "collapse-item" })
+                                    }
+                                    if (usertypeid == 4)  // Admin
+                                    {
+
+                                        @Html.ActionLink("info", "Index", "StudentTable", null, new { @class = "collapse-item" })
+
+
+                                    }
+                                }
+                                @{
+                                    if (usertypeid == 1 || usertypeid == 5)  // Admin or accountant
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Droit d'inscription :</h6>
+                                        @Html.ActionLink("entrer des droits d'inscription", "Create", "SubmissionFeeTables", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Droit d'inscitption entrés", "Index", "SubmissionFeeTables", null, new { @class = "collapse-item" })
+
+
+                                    }
+                                }
+                                @{
+                                    if (usertypeid == 1 || usertypeid == 2)  // Admin or operator
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Les absences</h6>
+                                        @Html.ActionLink("Marker L'absence d'elève", "Create", "AbsenceTables", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Tous les absences", "Index", "AbsenceTables", null, new { @class = "collapse-item" })
+
+                                    }
+                                    if (usertypeid == 4)  //Student
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Les absences</h6>
+                                        @Html.ActionLink("Voir mes Absences", "StudentAbsences", "AbsenceTables", null, new { @class = "collapse-item" })
+
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2 || usertypeid == 3 || usertypeid == 4)  // Admin OR Operator Or Teacher
+                {
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        info employées
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseEmployee" aria-expanded="true" aria-controls="collapseEmployee">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>les employées</span>
+                        </a>
+                        <div id="collapseEmployee" class="collapse" aria-labelledby="headingEmployee" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                @{
+                                    if (usertypeid == 1)  // Admin
+                                    {
+                                        <h6 class="collapse-header">Recrutement</h6>
+
+                                        @Html.ActionLink("Recruter", "Create", "StaffTable", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Toues les employées", "Index", "StaffTable", null, new { @class = "collapse-item" })
+                                    } }
+                                @{
+                                    if (usertypeid == 4)  // Student
+                                    {
+
+                                        @Html.ActionLink("Enseignant", "Teachers", "StaffTable", null, new { @class = "collapse-item" })
+                                    } }
+                                @{
+                                    if (usertypeid == 1 || usertypeid == 2)  // Admin or operator or Teacher
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Attendance:</h6>
+                                        @Html.ActionLink("Présence", "Create", "StaffAttendanceTable", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Les Présences", "Index", "StaffAttendanceTable", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Absence des employées", "Index", "STaffAbsence", null, new { @class = "collapse-item" })
+                                    }
+                                    if (usertypeid == 3)  // Admin or operator or Teacher
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Attendance:</h6>
+
+                                        @Html.ActionLink("Les Présences", "teacherAttendance", "StaffAttendanceTable", null, new { @class = "collapse-item" })
+                                    }
+                                }
+                                @{
+                                    if (usertypeid == 1 || usertypeid == 5)  // Admin OR accountant
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Salary:</h6>
+                                        @Html.ActionLink("Entrer Salaire d'empolyée", "Create", "EmployeeSalaryTables", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Tous les salaire", "Index", "EmployeeSalaryTables", null, new { @class = "collapse-item" })
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            @{
+                if (usertypeid == 1)  // Admin
+                {
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Parametre d'utilisateur</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Custom Setting</h6>
+                                @Html.ActionLink("Type d'utilisateur", "Index", "UserTypeTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Les utilisateures", "Index", "UserTables", null, new { @class = "collapse-item" })
+
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2)  // Admin OR Operator
+                {
+                    <!-- Nav Item - Utilities Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Configuration</span>
+                        </a>
+                        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Custom Configuration:</h6>
+                                @Html.ActionLink("anneés scolaires", "Index", "SessionTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Matière", "Index", "SubjectTable", null, new { @class = "collapse-item" })
+                               @*@Html.ActionLink("programme", "Index", "ProgrameTables", null, new { @class = "collapse-item" })*@
+                                @Html.ActionLink("Métiers", "Index", "DesignationTables", null, new { @class = "collapse-item" })
+
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Nav Item - Sessions Collapse Menu -->
+                    @*<li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSession" aria-expanded="true" aria-controls="collapseSession">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span></span>
+                        </a>
+                        <div id="collapseSession" class="collapse" aria-labelledby="headingSession" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Configuration:</h6>
+                                @Html.ActionLink("الدفعات", "Index", "SessionTables", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("خصائص البرامج", "Index", "ProgrameSessionTables", null, new { @class = "collapse-item" })
+                            </div>
+                        </div>
+                    </li>*@
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseClass" aria-expanded="true" aria-controls="collapseClass">
+                            <i class="fas fa-fw fa-wrench"></i>
+                            <span>Matière et niveau</span>
+                        </a>
+                        <div id="collapseClass" class="collapse" aria-labelledby="headingClass" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Configuration:</h6>
+                                @Html.ActionLink("Ajouter matière au niveau", "Create", "ClassSubjectTables", null, new { @class = "collapse-item" })
+                               
+                                @Html.ActionLink("Niveau avec Matière", "Index", "ClassSubjectTables", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Niveaux", "Index", "ClassTables", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Groupes", "Index", "GroupeTable", null, new { @class = "collapse-item" })
+                            </div>
+                        </div>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#email" aria-expanded="true" aria-controls="collapseClass">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Email</span>
+                    </a>
+                    <div id="email" class="collapse" aria-labelledby="headingClass" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+
+                            @Html.ActionLink("Emails aux élèves", "index", "EmailsToAllStudents", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Emails a un élève", "Index", "EmailsToStudents", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Emails aux employées", "Index", "EmailsToAllStaffs", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Emails a un employée", "Index", "EmailsToStaffs", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Emails a un groupe", "Index", "EmailsToGroupes", null, new { @class = "collapse-item" })
+                            @Html.ActionLink("Emails a un Niveau", "Index", "EmailToclasses", null, new { @class = "collapse-item" })
+                        </div>
+                    </div>
+                </li>
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2 || usertypeid == 3 || usertypeid == 4)  // Admin OR Operator
+                {
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Devoir au maison
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHomeWork" aria-expanded="true" aria-controls="collapseHomeWork">
+                            <i class="fas fa-fw fa-chart-area"></i>
+                            <span>Devoir au maison</span>
+                        </a>
+                        <div id="collapseHomeWork" class="collapse" aria-labelledby="headingHomeWork" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                @{
+                                    if (usertypeid == 1 || usertypeid == 3)  // Admin
+                                    {
+                                        <h6 class="collapse-header">Home Work Setting:</h6>
+                                        @Html.ActionLink("Type de devoir", "Index", "HomeWorkTypeTable", null, new { @class = "collapse-item" })
+                                        @Html.ActionLink("Ajouter devoir", "Create", "HomeWorkTable", null, new { @class = "collapse-item" })
+                                    }
+                                }
+                                @{
+                                    if (true)  // Admin or operator
+                                    {
+                                        <div class="collapse-divider"></div>
+                                        <h6 class="collapse-header">Devoir maison</h6>
+                                        @Html.ActionLink("Tous les devoirs", "Index", "HomeWorkTable", null, new { @class = "collapse-item" })
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2)  // Admin OR Operator
+                {
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Les examens
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Proprités des examens</span>
+                        </a>
+                        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Periode</h6>
+                                @Html.ActionLink("Ajouter periode d'examen", "Create", "ExamTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Les Periodes des examens", "Index", "ExamTable", null, new { @class = "collapse-item" })
+                                <h6 class="collapse-header">Emploie du temps</h6>
+                                @Html.ActionLink("Ajouter un Examen", "Create", "ExamTime", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Emploie du temp", "Index", "ExamTime", null, new { @class = "collapse-item" })
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Examination:</h6>
+                                @Html.ActionLink("Ajouter note d'examens", "Create", "ExamMarksTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Notes", "Index", "ExamMarksTable", null, new { @class = "collapse-item" })
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2)  // Admin OR Operator
+                {
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Les évenements
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseevent" aria-expanded="true" aria-controls="collapseevent">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Evenements</span>
+                        </a>
+
+                        <div id="collapseevent" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+
+
+                                @Html.ActionLink("Nouveau evenement", "Create", "EventTable", null, new { @class = "collapse-item" })
+
+                                <div class="collapse-divider"></div>
+
+                                @Html.ActionLink("Tous les évenments", "Index", "EventTable", null, new { @class = "collapse-item" })
+                            </div>
+                        </div>
+                    </li>
+
+                }
+            }
+            @{
+                if (usertypeid == 1 || usertypeid == 2)  // Admin OR Operator
+                {
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Emploie du temp
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTimeTable" aria-expanded="true" aria-controls="collapseTimeTable">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Emploie du temp</span>
+                        </a>
+                        <div id="collapseTimeTable" class="collapse" aria-labelledby="headingTimeTable" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">خصائص</h6>
+
+                                @Html.ActionLink("création", "Create", "TimeTblTable", null, new { @class = "collapse-item" })
+
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Class Wise:</h6>
+                                @Html.ActionLink("Tous les séances", "Index", "TimeTblTable", null, new { @class = "collapse-item" })
+                            </div>
+                        </div>
+                    </li>
+                } }
+            @{
+                if (usertypeid == 1 || usertypeid == 2 || usertypeid == 5)  // Admin OR Operator or accountant
+                {
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Les dépances
+                    </div>
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseexpenses" aria-expanded="true" aria-controls="collapseexpenses">
+                            <i class="fas fa-fw fa-folder"></i>
+                            <span>Les dépance</span>
+                        </a>
+                        <div id="collapseexpenses" class="collapse" aria-labelledby="headingexpenses" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">أصناف النفقات</h6>
+
+                                @Html.ActionLink("Nouveau type de déponce", "Create", "ExpenseTypeTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Les types de déponces", "Index", "ExpenseTypeTable", null, new { @class = "collapse-item" })
+
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Class Wise:</h6>
+                                @Html.ActionLink("Ajouter déponce", "Create", "ExpensesTable", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Tous les déponce", "Index", "ExpensesTable", null, new { @class = "collapse-item" })
+
+                            </div>
+                        </div>
+                    </li>
+                }
+            }
+            <!-- Nav Item - Charts -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Rapports
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport" aria-expanded="true" aria-controls="collapseReport">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Rapports</span>
+                </a>
+                <div id="collapseReport" class="collapse" aria-labelledby="headingReport" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Teacher Reports:</h6>
+                        @{
+                            if (usertypeid == 1 || usertypeid == 2 || usertypeid == 3 || usertypeid == 5)  // Admin OR Operator OR Teacher or accountant
+                            {
+                                @Html.ActionLink("Emploie du temps", "TeacherWiseReport", "TimeTableReports", null, new { @class = "collapse-item" })
+                            }
+                        }
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Rapport des déponces</h6>
+                        @{
+                            if (usertypeid == 1 || usertypeid == 5)  // Admin OR Accountant
+                            {
+                                @Html.ActionLink("Tous les déponces", "AllExpenses", "ExpenseReport", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Déponces au choix", "CustomExpenses", "ExpenseReport", null, new { @class = "collapse-item" })
+                            }
+                        }
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header"> Rapport de résultat</h6>
+                        @{
+                            if (usertypeid == 1 || usertypeid == 2 || usertypeid == 4)  // Admin OR Operator or studnet
+                            {
+                                @Html.ActionLink("Rapport des résultats", "PrintDMC", "ExamReports", null, new { @class = "collapse-item" })
+                            }
+                        }
+                        @*<h6 class="collapse-header"> Emploie du temps</h6>
+                    @{
+                        if (usertypeid == 4)  // Admin OR Operator or studnet
+                        {
+                           // @Html.ActionLink("التوقيت", "StudentReport", "TimeTableReports", new { id = Model.StudentID }, new { @class = "btn btn-default" })<br>
+                        }
+                    }*@
+                        <div class="collapse-divider"></div>
+                        <h6 class="collapse-header">Rapports des présences</h6>
+                        @{
+                            if (usertypeid == 1 || usertypeid == 2)  // Admin OR Operator
+                            {
+                                @Html.ActionLink("Absences des etudiants", "AllStudent", "AttendanceReports", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Présance des Employées", "AllStaff", "AttendanceReports", null, new { @class = "collapse-item" })
+
+                            }
+
+                            if (usertypeid == 1 || usertypeid == 2 || usertypeid == 3 || usertypeid == 5 || usertypeid == 6)  // Not Student  > show Employee Attendance Report
+                            {
+                                @Html.ActionLink("Rapports des présances", "Staff", "AttendanceReports", new { id = 0 }, new { @class = "collapse-item" })
+                            }
+                            else   // Show Student Attendance Report
+                            {
+                                @Html.ActionLink("Présence d'élève", "StudentAttedance", "AttendanceReports", new { id = 0 }, new { @class = "collapse-item" })
+                            }
+                        }
+
+
+                        @{
+                            if (usertypeid == 1 || usertypeid == 2)
+                            { // Admin OR Operator
+                                <div class="collapse-divider"></div>
+                                <h6 class="collapse-header">Fee's Reports:</h6>
+
+
+                                @Html.ActionLink("Frais Annuelle", "CustomAnnual", "FeeReports", null, new { @class = "collapse-item" })
+                                @Html.ActionLink("Frais d'inscription", "CustomTution", "FeeReports", null, new { @class = "collapse-item" })
+                            }
+                        }
+                    </div>
+                </div>
+            </li>
+
+
+            <!-- Nav Item - Charts -->
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Videos
+            </div>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVideos" aria-expanded="true" aria-controls="collapseVideos">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Video</span>
+                </a>
+                <div id="collapseVideos" class="collapse" aria-labelledby="headingVideos" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Videos:</h6>
+                        @Html.ActionLink("Ajouter Video", "Create", "VideoTable", null, new { @class = "collapse-item" })
+                        @Html.ActionLink("Videos", "Index", "VideoTable", null, new { @class = "collapse-item" })
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column" >
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                
+                    
+                          <b><h1 class="text-center"></h1></b>
+                  
+                 
+                    <!-- Topbar Search -->
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+
+                            </a>
+                            <!-- Dropdown - Messages -->
+
+                        </li>
+                        <!-- Nav Item - Alerts -->
+
+                       
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["UserName"]</span>
+
+                                <img class="img-profile rounded-circle" style="width:30px; height:30px;" src="@Session["Photo"]" />
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <i class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                               
+                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray"></i>
+                                @Html.ActionLink("Change Password", "ChangePassword", "Home")
+                                    @*@Html.ActionLink("Chanage Password", "ChangePassword", "Home", null, new { @class = "dropdown-item fas fa-user fa-sm fa-fw mr-2 text-gray-400" })*@
+                                       
+                                <div class="dropdown-divider"></div>
+
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray"></i>
+                                    Logout
+                                </a>
+                            </i>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span><b> </b></span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    @Html.ActionLink("Logout", "Logout", "Home", null, new { @class = "btn btn-primary" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/AdminTemplate/vendor/jquery/jquery.js"></script>
+    <script src="~/Content/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/AdminTemplate/vendor/jquery-easing/jquery.easing.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/AdminTemplate/js/sb-admin-2.js"></script>
+    <!-- Page level plugins -->
+    <script src="~/Content/AdminTemplate/vendor/chart.js/Chart.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/Content/AdminTemplate/js/demo/chart-area-demo.js"></script>
+    <script src="~/Content/AdminTemplate/js/demo/chart-pie-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="~/Content/AdminTemplate/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/AdminTemplate/vendor/datatables/dataTables.bootstrap4.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/Content/AdminTemplate/js/demo/datatables-demo.js"></script>
+</body>
+</html>

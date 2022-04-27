@@ -1,0 +1,84 @@
+﻿@model SchoolManagementSystem.EmployeeSalaryTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Employee's Salary Record's</h6>
+    </div>
+    <div class="card-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StaffTable.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StaffTable.Name)
+                </dd>
+                    </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Amount)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SalaryMonth)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SalaryMonth)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SalaryYear)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SalaryYear)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SalaryDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SalaryDate)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Comments)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Comments)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UserTable.FullName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UserTable.FullName)
+                    </dd>
+                </div>
+                </div>
+        </dl>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeSalaryID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index")
+
+    </div>
+</div>

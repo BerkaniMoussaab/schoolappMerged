@@ -1,0 +1,67 @@
+﻿@model IEnumerable<SchoolManagementSystem.HomeWorkTypeTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Nouveau", "Create", null, new { @class = "btn btn-info" })
+</p><div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Types de devoir</h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>
+                       Nom du type
+                    </th>
+
+                    <th style="text-align:center;vertical-align:middle">Options</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HomeWorkTypeName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.HomeWorkTypeID }) |
+                            @Html.ActionLink("Détails", "Details", new { id = item.HomeWorkTypeID }) |
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.HomeWorkTypeID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+    <script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+    <script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+    <script>
+        jQuery('#table_format').ddTableFilter();
+    </script>
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-36251023-1']);
+        _gaq.push(['_setDomainName', 'jqueryscript.net']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>

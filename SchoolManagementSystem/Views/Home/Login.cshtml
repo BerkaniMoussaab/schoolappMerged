@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login</title>
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/AdminTemplate/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="~/Content/AdminTemplate/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-5 col-lg- col-md-5">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body  ">
+                        <!-- Nested Row within Card Body -->
+                        <div class="p-6">
+                            <div class="text-center">
+                                <h1>Log In</h1>
+                                <h1 class="h4 text-gray-900 mb-4"><img alt="Dawn Cambridgy High School" src="~/Content/AdminTemplate/img/final_edit-4.png" height="160" /></h1>
+                                <p><b>login ici on utilisant votre email et mot de pass</b></p>
+                            </div>
+                            <hr />
+                            <h5 class="alert-danger">@ViewBag.message</h5>
+
+                            @using (Html.BeginForm("LoginUser", "Home", FormMethod.Post, new { @class = "form-horizontal user", role = "form", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" placeholder="Entrez votre email">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Mot de pass">
+                                </div>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox small">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck">
+                                        <label class="custom-control-label" for="customCheck">Sauvgarder moi</label>
+                                    </div>
+                                </div>
+
+                                <input type="submit" value="Login" class="btn btn-primary btn-user btn-block" />
+                                <hr>
+
+                                @Html.ActionLink("Email oublié", "ForgotPassword", "Home")
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Content/AdminTemplate/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/AdminTemplate/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/AdminTemplate/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/AdminTemplate/js/sb-admin-2.min.js"></script>
+</body>
+</html>

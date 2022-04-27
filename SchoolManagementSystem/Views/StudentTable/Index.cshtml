@@ -1,0 +1,159 @@
+﻿@model IEnumerable<SchoolManagementSystem.StudentTable>
+
+@{
+    ViewBag.Title = "Student";
+}
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">La liste des etudiants</h6>
+    </div>
+    <div class="card-body" >
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+
+                    <th>
+                        Numero d'etudiant
+                    </th>
+                    <th>
+                        Nom Complet
+                    </th>
+
+
+                    <th>
+                        Telephone
+                    </th>
+
+                    <th style="text-align:center;vertical-align:middle">
+                        Photo
+                    </th>
+
+
+                    <th>
+                        Niveau
+                    </th>
+                    <th>
+                        Groupe
+                    </th>
+
+                    <th>
+                        Additionneur
+                    </th>
+                    <th style="text-align:center;vertical-align:middle">Options</th>
+                </tr>
+            </thead>
+@{int usertypeid = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+    int userid = Convert.ToInt32(Convert.ToString(Session["UserID"])); }
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                if (usertypeid == 4 && item.UserID == userid)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Photo))
+                            {
+                                <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                            }
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GroupeTable.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserTable.FullName)
+                        </td>
+                        <td>
+                          
+                            @Html.ActionLink("Info", "Details", new { id = item.StudentID }, new { @class = "btn btn-info" })<br />
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    if (usertypeid != 4) { 
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactNo)
+                        </td>
+
+                        <td>
+                            @if (!string.IsNullOrEmpty(item.Photo))
+                            {
+                                <img src="@Url.Content(item.Photo)" alt="Image" style="width:100px;height:150px;max-width: 100%; height: auto;" />
+                            }
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.GroupeTable.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserTable.FullName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.StudentID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("info", "Details", new { id = item.StudentID }, new { @class = "btn btn-info" })<br />
+                        </td>
+                    </tr>
+                    }
+                }
+            }
+        </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+<script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+<script>
+    jQuery('#table_format').ddTableFilter();
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>

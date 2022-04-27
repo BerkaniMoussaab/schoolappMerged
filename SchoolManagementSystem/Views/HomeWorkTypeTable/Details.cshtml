@@ -1,0 +1,27 @@
+﻿@model SchoolManagementSystem.HomeWorkTypeTable
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HomeWorkTypeTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.HomeWorkTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

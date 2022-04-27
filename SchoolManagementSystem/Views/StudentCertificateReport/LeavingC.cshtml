@@ -1,0 +1,90 @@
+﻿@model SchoolManagementSystem.StudentPromotTable
+    @using SchoolManagementSystem.Models;
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>School Leaving Certificate</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+    <div>
+
+        <div class="container">
+
+            @using (Html.BeginForm("PrintLeavingC", "StudentCertificateReport",new { id=Model.StudentID},FormMethod.Post, new { @class = "form-horizontal user", role = "form", enctype = "multipart/form-data" }))
+            {
+
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="hidden-print">
+ 
+                                <a href="javascript:window.print()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                                <a href='@Url.Action("SendEmail","#")' class="btn btn-default"><i class="fas fa-envelope-open-text"></i> Email</a>
+                                <input type="submit" value="Submit" class="btn btn-success" />
+                                <h2>@ViewBag.Message</h2>
+                            </div>
+                            <br /><br />
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="text-center"> <h1><b>FINAL YEAR SCHOOL</b></h1></div>
+                                    <div class="text-center"><img src="~/Content/AdminTemplate/img/final_edit-4.png" height="200" width="220" /></div>
+                                    <div class="text-center"> <p>Afghan Colony Peshawar. Cell:0321-9113267</p></div>
+                                    <div class="text-center"><p> Affiliated With B.I.S.E. Peshawar.</p></div>
+                                    <div class="text-center"><h2><b>SCHOOL LEAVING CERTIFICATE</b></h2></div><br />
+                                    <br /><br />
+                                    <div><span class="pull-left"><b>Adm.#: @Model.StudentID</b></span><span class="pull-right"><b>Date: @DateTime.Now.ToShortDateString()</b></span></div>
+                                    <div class="clearfix"></div>
+                                    <br />
+                                    <div>
+                                        Certificate That
+                                        <span><b>Mr/Miss.</b></span><b>@Model.StudentTable.Name</b>
+                                        <span>son/daughter</span> of <b> Mr. @Model.StudentTable.FatherName</b>  and attendend this school up to <b>@Model.ClassTable.Name.</b>
+                                        Has paid all the dues of the school and was allowed to with draw his name on the above date.
+                                        <span>He</span>/
+
+                                        <span>She</span>
+                                        was studying in class <b>  @Model.ClassTable.Name</b> and passed/failed in the examination for promotion to  <b>class @Model.ClassTable.Name</b>.
+                                        <br /><br />
+                                        <b>Date of birth</b> (in words): <b>@WrittenNumerics.DateToWritten(Model.StudentTable.DateofBirth)</b>
+                                        <br /><b>Date of birth</b> (in figure): <b>@Model.StudentTable.DateofBirth.ToShortDateString()</b>
+                                        <br /><br />
+                                        <b>Conduct: Inam ullah</b>
+                                        <br /><br />
+                                        <div><spin class="pull-left">______________________</spin> <spin class="pull-right">______________________</spin></div>
+                                        <br />
+                                        <div>
+                                            <spin class="pull-left">Prepared by</spin><spin class="pull-right">Principal</spin>
+                                        </div>
+                                        <br />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+        <script src="~/Scripts/moment.js"></script>
+        <script src="~/Scripts/bootstrap-datetimepicker.js"></script>
+
+    </div>
+</body>
+</html>

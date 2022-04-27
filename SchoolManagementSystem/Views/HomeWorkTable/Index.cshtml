@@ -1,0 +1,161 @@
+﻿@model IEnumerable<SchoolManagementSystem.HomeWorkTable>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<h2>Liste des Devoirs</h2>
+
+<p>
+    @Html.ActionLink("Ajouter nouveau devoir", "Create", null, new { @class = "btn btn-danger" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">La liste des devoirs</h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>
+                        @Html.DisplayNameFor(model => model.HomeWorkTitle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HomeWorkDescription)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SubmitDate)
+                    </th>
+                    <th>
+                        File
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HomeWorkTypeTable.HomeWorkTypeName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ClassTable.Name)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.GroupeTable.Name)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{int usertypeid = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+                    foreach (var item in Model)
+                    {
+                        if (usertypeid != 4 && DateTime.Compare(DateTime.Now, item.SubmitDate) > 0)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HomeWorkTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HomeWorkDescription)
+                                </td>
+                                @{ if (DateTime.Compare(DateTime.Now, item.SubmitDate) > 0)
+                                    {
+                                        <td style="background-color:red;color:white">
+                                            @Html.DisplayFor(modelItem => item.SubmitDate)
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="background-color:green;color:white">
+                                            @Html.DisplayFor(modelItem => item.SubmitDate)
+                                        </td>
+                                    }}
+                                <td>
+                                    <a class="btn btn-outline-primary" href="@item.DocPath">Download @item.HomeWorkTypeTable.HomeWorkTypeName</a>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HomeWorkTypeTable.HomeWorkTypeName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GroupeTable.Name)
+                                </td>
+                                <td class="btn-group">
+                                    @Html.ActionLink("Modifier", "Edit", new { id = item.HomeWorkID }, new { @class = "btn btn-primary" })
+                                    @Html.ActionLink("Détails", "Details", new { id = item.HomeWorkID }, new { @class = "btn btn-info" })
+                                    @Html.ActionLink("Supprimer", "Delete", new { id = item.HomeWorkID }, new { @class = "btn btn-danger" })
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            if (DateTime.Compare(DateTime.Now, item.SubmitDate) < 0)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HomeWorkTitle)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HomeWorkDescription)
+                                    </td>
+                                    @{ if (DateTime.Compare(DateTime.Now, item.SubmitDate) > 0)
+                                        {
+                                            <td style="background-color:Green;color:white">
+                                                @Html.DisplayFor(modelItem => item.SubmitDate)
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td style="background-color:green;color:white">
+                                                @Html.DisplayFor(modelItem => item.SubmitDate)
+                                            </td>
+                                        }}
+                                    <td>
+                                        <a class="btn btn-outline-primary" href="@item.DocPath">Download @item.HomeWorkTypeTable.HomeWorkTypeName</a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.HomeWorkTypeTable.HomeWorkTypeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.GroupeTable.Name)
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+}
+                        }
+                    }
+
+
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+<script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+<script>
+    jQuery('#table_format').ddTableFilter();
+</script>
+<script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36251023-1']);
+    _gaq.push(['_setDomainName', 'jqueryscript.net']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>

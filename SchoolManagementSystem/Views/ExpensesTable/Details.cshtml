@@ -1,0 +1,64 @@
+﻿@model SchoolManagementSystem.ExpensesTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Expense's Detail</h6>
+    </div>
+    <div class="card-body">
+            <dl class="dl-horizontal">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dt>
+                            Expense Type
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ExpenseTypeTable.Name)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Amount)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Amount)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ExpensesDate)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ExpensesDate)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Reason)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Reason)
+                        </dd>
+                    </div>
+                    <div class="col-md-6">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.UserTable.FullName)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.UserTable.FullName)
+                        </dd>
+                    </div>
+                </div>
+        </dl>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ExpensesID }, new { @class = "btn btn-primary" }) |
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    </div>
+
+  

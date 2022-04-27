@@ -1,0 +1,78 @@
+﻿@model SchoolManagementSystem.HomeWorkTable
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HomeWorkTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubmitDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubmitDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocPath)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassTable.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HomeWorkTypeTable.HomeWorkTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HomeWorkTypeTable.HomeWorkTypeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupeTable.Name)
+        </dt>
+
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

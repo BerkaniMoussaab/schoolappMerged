@@ -1,0 +1,66 @@
+﻿@model SchoolManagementSystem.ExamTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="card shadow mb-4">
+<div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Exam Detail</h6>
+</div>
+<div class="card-body">
+  
+    <dl class="dl-horizontal">
+        <div class="row">
+            <div class="col-md-12">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StartDate)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.EndDate)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descrption)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descrption)
+                </dd>
+            </div>
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserTable.FullName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.UserTable.FullName)
+                </dd>
+                </div>
+            </div>
+    </dl>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExamID }) |
+    @Html.ActionLink("Back to List", "Index")
+</div>
+</div>

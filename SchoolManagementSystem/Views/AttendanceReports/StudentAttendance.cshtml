@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SchoolManagementSystem.AbsenceTable>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Attendance Report</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+    <div class="form-group">
+        <button type="button" class="btn btn-primary">Save Record</button>
+        <a href="javascript:window.print()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+        <a href='@Url.Action("SendEmail","#")' class="btn btn-default"><i class="fas fa-envelope-open-text"></i>Email</a>
+        <br /><br />
+        <div class="row">
+            <div class="col-md-10">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center"> <h1><b>FINAL YEAR SCHOOL</b></h1></div>
+                        <div class="text-center"><img src="~/Content/AdminTemplate/img/final_edit-4.png" height="200" width="220" /></div>
+                        <div class="text-center"> <p>Afghan Colony Peshawar. Cell:0321-9113267</p></div>
+                        <div class="text-center"><p> Affiliated With B.I.S.E. Peshawar.</p></div>
+                        <div class="text-center"><h2><b>STUDENT ATTENDANCE REPORT</b></h2></div><br />
+                        <br />
+                        <div class="clearfix"></div>
+                        <br />
+                        <div class="container body-content">
+
+
+
+
+                            <table class="table table-striped table-condensed table-hover">
+
+                                <tr>
+                                    <th>
+                                        Student
+                                    </th>
+                                    <th>
+                                        Class
+                                    </th>
+                                    <th>
+                                        Attend Date
+                                    </th>
+                                    <th>
+                                        Attend Time
+                                    </th>
+
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayFor(modelItem => item.StudentTable.Name)
+                                        </th>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AbsenceDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AbsenceHour)
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

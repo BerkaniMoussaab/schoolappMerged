@@ -1,0 +1,97 @@
+﻿@model IEnumerable<SchoolManagementSystem.AnnualTable>
+
+@{
+    ViewBag.Title = "Promote Fee";
+}
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+<p>
+    @Html.ActionLink("Ajouter nouveau", "Create", null, new { @class = "btn btn-success" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">La liste des Absences</h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>
+                        Nom Du Frais Annuelle
+                    </th>
+                    <th>
+                        Filière
+                    </th>
+                    <th>
+                        Détail
+                    </th>
+                    <th>
+                        Montant
+                    </th>
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Créateur
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProgrameTable.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fees)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActive)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserTable.FullName)
+                        </td>
+                        <td class="btn-group">
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.AnnualID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Détails", "Details", new { id = item.AnnualID }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.AnnualID }, new { @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+<script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+<script>
+            jQuery('#table_format').ddTableFilter();
+</script>
+<script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36251023-1']);
+            _gaq.push(['_setDomainName', 'jqueryscript.net']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+</script>
+

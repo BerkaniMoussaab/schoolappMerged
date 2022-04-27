@@ -1,0 +1,112 @@
+﻿@model IEnumerable<SchoolManagementSystem.ExpensesTable>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Report</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+</head>
+<body>
+    <div class="form-group">
+      
+        <a href="javascript:window.print()" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+        <a href='@Url.Action("SendEmail","#")' class="btn btn-default"><i class="fas fa-envelope-open-text"></i>Email</a>
+    </div>
+    <br /><br />
+    <div class="container body-content">
+        <h5 class="alert-danger">@ViewBag.message</h5>
+        @using (Html.BeginForm("CustomExpenses", "ExpenseReport", FormMethod.Post, new { @class = "form-horizontal user", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="custom-control-label">Date début</label>
+                <input type="date" class="form-control form-control-user" id="fromDate" name="fromDate" aria-describedby="emailHelp">
+            </div>
+            <div class="form-group">
+                <label class="custom-control-label">Date fin</label>
+                <input type="date" class="form-control form-control-user" id="toDate" name="toDate">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Avoir le rapport" class="btn btn-primary btn-user btn-block" />
+            </div>
+
+        }
+
+        <div class="row">
+            <div class="col-md-10">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="text-center"> <h1><b>Nom d'ecole</b></h1></div>
+                        <div class="text-center"><img src="~/Content/AdminTemplate/img/final_edit-4.png" height="200" width="220" /></div>
+                        <div class="text-center"> <p>Adress test. Tel: 0777777777</p></div>
+                        <div class="text-center"><p> Agrément : 5355278</p></div>
+                        <div class="text-center"><h2><b>Rapport des déponce par date</b></h2></div><br />
+                        <br />
+                        <div class="clearfix"></div>
+                        <br />
+
+                        <table class="table table-striped table-condensed table-hover">
+                            <tr>
+                                <th>
+                                   Type
+                                </th>
+                                <th>
+                                   Date
+                                </th>
+                                <th>
+                                   Total
+                                </th>
+                                <th>
+                                   discription
+                                </th>
+
+                                <th>
+                                    Utilisateur
+                                </th>
+
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ExpenseTypeTable.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ExpensesDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Amount)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Reason)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserTable.FullName)
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

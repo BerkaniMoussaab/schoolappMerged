@@ -1,0 +1,91 @@
+﻿@model SchoolManagementSystem.AbsenceTable
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AbsenceTable</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SessionID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SessionID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbsenceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbsenceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AbsenceRecordingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AbsenceRecordingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Justifcation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Justifcation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GroupeTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GroupeTable.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserTable.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserTable.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClassTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClassTable.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentTable.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StudentTable.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AbsenceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

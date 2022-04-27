@@ -1,0 +1,307 @@
+﻿@model SchoolManagementSystem.StudentTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">تفاصيل التلميذ</h6>
+    </div>
+    <div class="card-body">
+        <div class="hidden-print">
+            <div class="btn-group">
+                <a href="#" class="btn btn-success">المزيد من التفاصيل</a>
+                <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    @Html.ActionLink("تقرير الحضور", "StudentAttendance", "AttendanceReports", new { id = Model.StudentID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("التوقيت", "StudentReport", "TimeTableReports", new { id = Model.StudentID }, new { @class = "btn btn-default" })<br>
+                    @Html.ActionLink("تحرير شهادة", "CharacterC", "StudentCertificateReport", new { id = Model.StudentID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("تحرير شهادة مؤقتة", "ProvisionalC", "StudentCertificateReport", new { id = Model.StudentID }, new { @class = "btn btn-default" })
+                    @Html.ActionLink("شهادة تبرئة", "LeavingC", "StudentCertificateReport", new { id = Model.StudentID }, new { @class = "btn btn-default" })
+
+
+                </ul>
+            </div>
+            <br />
+            <div class="form-group">
+                <a href="javascript:window.print()" class="btn btn-default"><i class="fas fa-print"></i> طباعة</a>
+                <a href='@Url.Action("SendEmail","#")' class="btn btn-default"><i class="fas fa-envelope-open-text"></i> ارسال بريد </a>
+            </div>
+        </div>
+        <hr />
+        <div class="card-body ">
+            <table class="table table-border">
+                <dl class="dl-horizontal">
+
+                    <div class="card-header">
+                        معلومات التلميذ
+                    </div>
+                    <div class="card-body">
+                        <dd>
+                            @{string imagepath = Model.Photo;
+                                <img src="@Url.Content(imagepath)" alt="Image" style="width:200px;height:150px;max-width: 100%; height: auto;" />
+                            }
+                        </dd>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    اسم التلميذ
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.Name)
+                                </dd>
+                            </div>
+
+                            <div class="col-md-2">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.SessionTable.Name)
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.SessionTable.Name)
+                                </dd>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    الشعبة
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.ProgrameTable.Name)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    القسم
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.ClassTable.Name)
+                                </dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    تاريخ الازدياد
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.DateofBirth)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    الجنس
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.Gender)
+                                </dd>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    رقم الهاتف
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.ContactNo)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    الجنسية
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nationality)
+                                </dd>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    رقم التعريف الوطني
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.CNIC)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    المؤسسة السابقة
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.PreviousSchool)
+                                </dd>
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-2">
+                                <dt>
+                                    تاريخ التسجيل
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.AddmissionDate)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    المعدل السابق
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.PreviousPercentage)
+                                </dd>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="card-header">
+                       معلومات الولي
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    اسم الولي
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.FatherName)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    رقم التعريف الوطني
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.FNIC)
+                                </dd>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    المهنة
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.FathersGuardiansOccupationofProfession)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                   البريد الالكتروني
+                                </dt>
+                            </div>
+                            <div class="col-md-3">
+                                <dd>
+                                    @Html.DisplayFor(model => model.EmailAddress)
+                                </dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                    هاتف المكتب
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.PhoneOffice)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                    رقم الهاتف
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.PhoneResident)
+                                </dd>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <dt>
+                                  العنوان البريدي
+                                </dt>
+                            </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.FathersGuardiansPostalAddress)
+                                </dd>
+                            </div>
+                            <div class="col-md-2">
+                                <dt>
+                                   العنوان
+                                </dt>
+                            </div>
+                            <div class="col-md-2">
+                                <dd>
+                                    @Html.DisplayFor(model => model.Address)
+                                </dd>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-md-2">
+                             <dt>
+                                    اسم المستخدم
+                                </dt>
+                                </div>
+                            <div class="col-md-4">
+                                <dd>
+                                    @Html.DisplayFor(model => model.UserTable.FullName)
+                                </dd>
+                            </div>
+                            </div>
+
+
+</dl>
+            </table>
+            <div class="hidden-print">
+                @Html.ActionLink("تعديل", "Edit", new { id = Model.StudentID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("عودة للقائمة", "Index")
+            </div>
+        </div>
+    </div>
+

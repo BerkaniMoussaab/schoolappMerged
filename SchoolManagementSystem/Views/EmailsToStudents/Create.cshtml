@@ -1,0 +1,99 @@
+﻿@model SchoolManagementSystem.EmailsToStudents
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>EmailsToStudent</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="col-md-4">
+        <div class="form-group">
+            @Html.LabelFor(model => model.ClassId, "Select Current Class", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.ClassId, ViewBag.Classes as SelectList, "--Select Class--", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.GroupeId, "Select Current Groupe", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.GroupeId, new SelectList(" "), "--Select Groupe--", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.StudentId, "Select Current Student", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.StudentId, new SelectList(" "), "--Select Student--", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Message, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Subject, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Subject, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="~/Content/AdminTemplate/js/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#ClassId").change(function () {
+            $("#GroupeId").empty();
+            $.get("/EmailsToStudents/GetGroupeList", { ClassID: $("#ClassId").val() }, function (data) {
+                $("#GroupeId").empty();
+                let newOption = new Option('Select groupe ', ' ');
+                $("#GroupeId").append(newOption);
+                $.each(data, function (index, row) {
+
+                    $("#GroupeId").append("<option value='" + row.GroupeId + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#GroupeId").change(function () {
+            $("#StudentId").empty();
+            document.getElementById('StudentId').selectedIndex = -1;
+            $.get("/EmailsToStudents/GetStudentList", { Groupe: $("#GroupeId").val() }, function (data) {
+                $("#StudentId").empty();
+
+                $.each(data, function (index, row) {
+
+                    $("#StudentId").append("<option value='" + row.StudentID + "'>" + row.Name + "</option>")
+                });
+            });
+        })
+    });
+   
+</script>

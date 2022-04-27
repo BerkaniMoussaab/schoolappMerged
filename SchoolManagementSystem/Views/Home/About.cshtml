@@ -1,0 +1,235 @@
+﻿@{
+    ViewBag.Title = "Home Screen";
+}
+@{
+
+    int usertypeid = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+    if (usertypeid == 1)
+    {
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header panel panel-success">
+                        التلاميذ
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "StudentTables")'>
+                                    <i class="fas fa-user-graduate fa-2x"></i>
+                                    <p>اضافة جديد</p>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "StudentPromotTables")'>
+                                    <i class="fas fa-user fa-2x"></i>
+                                    <p>ترقية طالب</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "ExamTables")'>
+                                    <i class="fas fa-poll-h fa-2x"></i>
+                                    <p>امتحان</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "StudentTables")'>
+                                    <i class="fas fa-user-friends fa-2x"></i>
+                                    <p>قائمة التلاميذ</p>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        العمال
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "StaffTables")'>
+                                    <i class="fas fa-user-tie fa-2x"></i>
+                                    <p>اضافة جديد</p>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "StaffAttendanceTables")'>
+                                    <i class="fas fa-chart-line fa-2x"></i>
+                                    <p>حضور العمال</p>
+                                </a>
+                            </div>
+
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "StaffTables")'>
+                                    <i class="fas fa-users fa-2x"></i>
+                                    <p>قائمة العمال</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    }
+}
+
+
+<div class="row">
+    @{
+
+        int usertypeids = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+        if (usertypeids == 1)
+        {
+
+
+            <div class="col-md-6">
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        مستخدمو البرنامج
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "UserTables")'>
+                                    <i class="fas fa-user fa-2x"></i>
+                                    <p>اضافة مستخدم</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "UserTables")'>
+                                    <i class="fas fa-users fa-2x"></i>
+                                    <p>قائمة المستخدمين</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    @{
+
+        int usertypeida = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+        if (usertypeida == 1 || usertypeida == 5)
+        {
+            <div class="col-md-6">
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        المحاسبة
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "SubmissionFeeTables")'>
+                                    <i class="fas fa-funnel-dollar fa-2x"></i>
+                                    <p>رسوم الطالب</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3  text-center">
+                                <a href='@Url.Action("Create", "EmployeeSalaryTables")'>
+                                    <i class="fas fa-funnel-dollar fa-2x"></i>
+                                    <p>أجور العمال</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3  text-center">
+                                <a href='@Url.Action("Index", "ExpensesTables")'>
+                                    <i class="fas fa-list fa-2x"></i>
+                                    <p>النفقات</p>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+@{
+    int usertypeidas = Convert.ToInt32(Convert.ToString(Session["UserTypeID"]));
+    if (usertypeidas == 1 || usertypeida == 2)
+    {
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Operator Access
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "ExamMarksTables")'>
+                                    <i class="fas fa-ellipsis-v fa-2x"></i>
+                                    <p>انشاء امتحان</p>
+                                </a>
+
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "AttendanceTables")'>
+                                    <i class="fas fa-list fa-2x"></i>
+                                    <p>حظور التلاميذ</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Create", "StaffAttendanceTables")'>
+                                    <i class="fas fa-list fa-2x"></i>
+                                    <p>حضور العمال</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Help & Support
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 text-center">
+                               <a href='@Url.Action("Index", "SendEmail")'>
+                                    <i class="fas fa-desktop fa-2x"></i>
+                                    <p>البريد الالكتروني</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "SendEmailStaff")'>
+                                    <i class="fas fa-sms fa-2x text-success"></i>
+                                    <p>بريد العمال</p>
+                                </a>
+                            </div>
+                            <div class="col-md-3 text-center">
+                                <a href='@Url.Action("Index", "Videos")'>
+                                    <i class="far fa-eye fa-2x text-danger"></i>
+                                    <p>فيديو</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    }
+}

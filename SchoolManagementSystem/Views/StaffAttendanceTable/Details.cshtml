@@ -1,0 +1,58 @@
+﻿@model SchoolManagementSystem.AbsenceTable
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Employee Attandance Record</h6>
+    </div>
+    <div class="card-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AttendDate)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AttendDate)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ComingTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ComingTime)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClosingTime)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ClosingTime)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.StaffTable.Name)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.StaffTable.Name)
+                    </dd>
+                    </div>
+                </div>
+            
+</dl>  
+        @Html.ActionLink("Edit", "Edit", new { id = Model.StaffAttendanceID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index")
+ 
+    </div>
+</div>

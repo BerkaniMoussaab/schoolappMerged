@@ -1,0 +1,139 @@
+﻿@model SchoolManagementSystem.ExamMarksTable
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="card mb-4 shadow">
+    <div class="card-header">
+        <h4>Enter Student Mark Sheet Details</h4>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Enter Promote ID" id="promoteid" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" value="Find" id="FindPromoteRecord" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StudentID, "StudentID", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.DropDownList("StudentID", null, htmlAttributes: new { @class = "form-control", @id = "StudentID" })
+                            @Html.ValidationMessageFor(model => model.StudentID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ExamID, "ExamID", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.DropDownList("ExamID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ExamID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ClassSubjectID, "ClassSubjectID", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.DropDownList("ClassSubjectID", null, htmlAttributes: new { @class = "form-control", @id = "ClassSubjectID" })
+                            @Html.ValidationMessageFor(model => model.ClassSubjectID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TotalMarks, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.TotalMarks, new { htmlAttributes = new { @class = "form-control", @id = "TotalMarks" } })
+                            @Html.ValidationMessageFor(model => model.TotalMarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ObtainMarks, htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.ObtainMarks, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ObtainMarks, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Create" class="btn btn-success" />
+
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#FindPromoteRecord').click(function () {
+
+            $('#ClassSubjectID').html('');
+            $('#StudentID').html('');
+            $.ajax({
+                    url: '@Url.Action("GetByPromotID", "ExamMarksTables")',
+                    type: 'GET',
+                    data: { sid: $('#promoteid').val() },
+                    dataType: 'Json',
+                    success: function (response) {
+                        for(var i = 0; i < response.std.length; i++)
+                        {
+                            $('#StudentID').append("<option value=" + response.std[i].StudentID + ">" + response.std[i].Name + "</option>");
+                        }
+                       
+                        for(var i = 0; i < response.subjects.length; i++)
+                        {
+                            $('#ClassSubjectID').append("<option value=" + response.subjects[i].ClassSubjectID + ">" + response.subjects[i].Name + "</option>");
+                        }
+                       
+                    },
+                    error: function () {
+                    }
+                });
+        });
+        $('#ClassSubjectID').change(function () {
+
+                $.ajax({
+                    url: '@Url.Action("GetTotalMarks", "ExamMarksTables")',
+                    type: 'GET',
+                    data: { sid: $(this).val() },
+                    dataType: 'Json',
+                    success: function (response) {
+                        $('#TotalMarks').val(response.data);
+                    },
+                    error: function () {
+                    }
+                });
+            });
+
+
+
+
+        });
+
+</script>
+@Scripts.Render("~/bundles/jqueryval")

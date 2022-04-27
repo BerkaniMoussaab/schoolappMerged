@@ -1,0 +1,185 @@
+﻿@model SchoolManagementSystem.StudentPromotTable
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<div class="card mb-4 shadow">
+    <div class="card-header">
+        <h4>Afilliation</h4>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="number" class="form-control" placeholder="Numero d'étudiant" id="studentid" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary" value="Chercher" id="FindStudentRecord" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.StudentPromotID)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StudentID, "Sélectionnez l'étudiant", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("StudentID", null, htmlAttributes: new { @class = "form-control", @id = "StudentID" })
+                            @Html.ValidationMessageFor(model => model.StudentID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ClassID, "Sélectionnez le niveau", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("ClassID", null, htmlAttributes: new { @class = "form-control", @id = "ClassID" })
+                            @Html.ValidationMessageFor(model => model.ClassID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ProgrameSessionID, "Selectionnez l'année scolaire", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("ProgrameSessionID", null, htmlAttributes: new { @class = "form-control", @id = "ProgrameSessionID" })
+                            @Html.ValidationMessageFor(model => model.ProgrameSessionID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PromoteDate, "Date", htmlAttributes: new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PromoteDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PromoteDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.AnnualFee, "Prix Annuelle", htmlAttributes: new { @class = "control-label" })
+
+                            @Html.EditorFor(model => model.AnnualFee, new { htmlAttributes = new { @class = "form-control", @id = "AnnualFee" } })
+                            @Html.ValidationMessageFor(model => model.AnnualFee, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsActive, "Status", htmlAttributes: new { @class = "control-label" })
+
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsActive)
+                                @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsSubmit, "Payé", htmlAttributes: new { @class = "control-label " })
+
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsSubmit)
+                                @Html.ValidationMessageFor(model => model.IsSubmit, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Registrer" class="btn btn-success" />
+                        @Html.ActionLink("Retour", "Index")
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+            </div>
+
+
+
+
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $('#StudentID').change(function () {
+
+                $('#ClassID').html('');
+                $.ajax({
+                    url: '@Url.Action("GetPromotClsList", "StudentPromotTables")',
+                    type: 'GET',
+                    data: { sid: $(this).val() },
+                    dataType: 'Json',
+                    success: function (response) {
+                        for(var i = 0; i < response.data.length; i++)
+                        {
+                            $('#ClassID').append("<option value=" + response.data[i].ClassID + ">" + response.data[i].Name + "</option>");
+                        }
+                    },
+                    error: function () {
+                    }
+                });
+            });
+
+
+            $('#ProgrameSessionID').change(function () {
+
+                $.ajax({
+                    url: '@Url.Action("GetAnnulFee", "StudentPromotTables")',
+                    type: 'GET',
+                    data: { sid: $(this).val() },
+                    dataType: 'Json',
+                    success: function (response) {
+                       $('#AnnualFee').val(response.fees);
+                    },
+                    error: function () {
+                    }
+                });
+            });
+
+
+
+
+
+        });
+
+        </script>
+        @Scripts.Render("~/bundles/jqueryval")
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#FindStudentRecord').click(function () {
+
+                $.ajax({
+                    url: '@Url.Action("GetByStudentID", "StudentPromotTables")',
+                    type: 'GET',
+                    data: { sid: $('#studentid').val() },
+                    dataType: 'Json',
+                    success: function (response) {
+                        $('#StudentID').val(response.StudentID);
+                        $('#ClassID').val(response.ClassID);
+                    },
+                    error: function () {
+                    }
+                });
+            });
+
+
+
+
+
+        });
+
+</script>
+@Scripts.Render("~/bundles/jqueryval")

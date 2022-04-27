@@ -1,0 +1,151 @@
+﻿@model IEnumerable<SchoolManagementSystem.AbsenceTable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    
+<h2>Liste des absences</h2>
+
+<p>
+    @Html.ActionLink("Ajouter nouvelle absence", "Create", null, new { @class = "btn btn-danger" })
+</p>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">La liste des Absences</h6>
+    </div>
+    <div class="card-body">
+
+        <table class="table table-striped table-bordered table-sm" cellspacing="0" id="table_format" style="text-align:center;">
+            <thead style="text-align:center">
+                <tr style="text-align:center">
+                    <th>
+                        L'élève
+                    </th>
+                    <th>
+                        Niveau
+                    </th>
+                    <th>
+                        Groupe
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        heure
+                    </th>
+                    <th>
+
+                        Heure d'ajout
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        justification
+                    </th>
+                    <th>
+                        Additionneur
+                    </th>
+                    <th style="text-align:center;vertical-align:middle">Options</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentTable.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClassTable.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GroupeTable.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AbsenceDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AbsenceHour, new { @class = "date" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AbsenceRecordingDate)
+                    </td>
+
+                    @if (item.Status)
+                    {
+                        <td style="color:white;background-color:green;text-align:center;vertical-align:central">
+                            Justifié
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td style="color:white;Background:red;text-align:center;vertical-align:central">
+
+                            Non Justifié
+                            <br />
+
+                        </td>
+                    }
+
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Justifcation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserTable.FullName)
+                    </td>
+
+
+
+                    @if (item.Status)
+                    {
+                        <td class="btn-group">
+                            @Html.ActionLink("Modifier", "Edit", new { id = item.AbsenceID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Détails", "Details", new { id = item.AbsenceID }, new { @class = "btn btn-info" })
+                           
+                        </td>
+                    }
+
+                    else
+                    {
+                        <td class="btn-group">
+                            @Html.ActionLink("Justifier", "Edit", new { id = item.AbsenceID }, new { @class = "btn btn-primary" })
+                            @Html.ActionLink("Détails", "Details", new { id = item.AbsenceID }, new { @class = "btn btn-info" })
+                            @Html.ActionLink("Supprimer", "Delete", new { id = item.AbsenceID }, new { @class = "btn btn-danger" })
+                        </td>
+
+                    }
+
+
+                </tr>
+                }
+          </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script src="~/Content/AdminTemplate/js/jquery-1.11.3.min.js"></script>
+        <script src="~/Content/AdminTemplate/vendor/datatables/ddtf.js"></script>
+        <script>
+            jQuery('#table_format').ddTableFilter();
+        </script>
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-36251023-1']);
+            _gaq.push(['_setDomainName', 'jqueryscript.net']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>

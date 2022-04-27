@@ -1,0 +1,77 @@
+﻿@model SchoolManagementSystem.UserTable
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Users Detail</h6>
+    </div>
+    <div class="card-body">
+        <hr />
+        <dl class="dl-horizontal">
+            <div class="row">
+                <div class="col-md-6">
+                    <dt>
+                        Full Name
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FullName)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        User Name
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UserName)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+
+                    <dt>
+                        Contact No
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ContactNo)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        Email Address
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.EmailAddress)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        Address
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                </div>
+                <div class="col-md-6">
+                    <dt>
+                        User Type
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UserTypeTable.TypeName)
+                    </dd>
+                </div>
+                </div>
+        </dl>
+   
+  
+        @Html.ActionLink("Edit", "Edit", new { id = Model.UserID }, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    </div>
+    </div>
